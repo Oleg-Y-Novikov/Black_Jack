@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game
   CARDS = {
     🂢: 2, 🂣: 3, 🂤: 4, 🂥: 5, 🂦: 6, 🂧: 7, 🂨: 8,
@@ -16,6 +18,28 @@ class Game
   def self.run
     new.run
   end
+
+  def run
+    clear
+    file = File.new("./image/info.txt", "r")
+    puts file.read
+    file.close
+    create_players
+    loop do
+      hand_out_cards
+      total_points
+      print_status("skip")
+      player_step
+      print_result
+      puts "Хотите сыграть ещё раз? Введите y/n"
+      choice = gets.chomp
+      @bank = 0
+      @player.skip = 0
+      break if choice == "n"
+    end
+  end
+
+  private
 
   def create_players
     print "Введите ваше имя: "
@@ -40,7 +64,7 @@ class Game
 
   def place_bets
     if @player.money < 10
-      `play {{./music/1.wav}}`
+      `play {{./audio/1.wav}}`
       clear
       abort "Вы проиграли все деньги...🤬"
     elsif @dealer.money < 10
@@ -78,21 +102,13 @@ class Game
 
   def dealer_score
     @dealer.dealer_cards.each do |card|
-      if @dealer.count > 10 && CARDS[card] == 11
-        @dealer.count += 1
-      else
-        @dealer.count += CARDS[card]
-      end
+      @dealer.count > 10 && CARDS[card] == 11 ? @dealer.count += 1 : @dealer.count += CARDS[card]
     end
   end
 
   def player_score
     @player.player_cards.each do |card|
-      if @player.count > 10 && CARDS[card] == 11
-        @player.count += 1
-      else
-        @player.count += CARDS[card]
-      end
+      @player.count > 10 && CARDS[card] == 11 ? @player.count += 1 : @player.count += CARDS[card]
     end
   end
 
@@ -128,7 +144,7 @@ class Game
       @player.skip = 1
       dealer_step
       total_points
-      print_status(1)
+      print_status("skip")
     when "show"
       print_status("show")
     end
@@ -148,30 +164,9 @@ class Game
   def check_status
     return 0 if (21 - @player.count) == (21 - @dealer.count)
 
-    return -1 if @player.count > 21
-
     return 1 if @dealer.count > 21
 
-    return 1 if (21 - @player.count) < (21 - @dealer.count)
-  end
-
-  def run
-    file = File.new("./image/info.txt", "r")
-    puts file.read
-    file.close
-    create_players
-    loop do
-      hand_out_cards
-      total_points
-      print_status(1)
-      player_step
-      print_result
-      puts "Хотите сыграть ещё раз? Введите y/n"
-      choice = gets.chomp
-      @bank = 0
-      @player.skip = 0
-      break if choice == "n"
-    end
+    return 1 if (21 - @player.count).abs < (21 - @dealer.count).abs
   end
 
   def print_result

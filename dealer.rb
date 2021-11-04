@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Dealer
   attr_accessor :name, :dealer_cards, :count, :money
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Player
   attr_accessor :name, :player_cards, :count, :money, :skip
 
@@ -5,8 +7,7 @@ class Player
     @name = name
     @player_cards = []
     @count = 0
-    @money = 10
+    @money = 100
     @skip = 0
   end
-
 end
