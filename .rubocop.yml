@@ -3,7 +3,7 @@ Style/StringLiterals:
 
 Metrics/MethodLength:
   Enabled: true
-  Max: 17
+  Max: 15
 
 Style/Documentation:
   Enabled: false

@@ -21,9 +21,7 @@ class Game
 
   def run
     clear
-    file = File.new("./image/info.txt", "r")
-    puts file.read
-    file.close
+    puts File.readlines("./image/info.txt")
     create_players
     loop do
       hand_out_cards
