@@ -7,7 +7,6 @@ class Games
     @player = Player.new(player_name)
     @opponent = Dealer.new
     @bank = 0
-    @start_image = File.readlines("./image/info.txt")
     @playing_cards = Card.new
   end
 
