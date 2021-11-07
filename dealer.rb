@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Dealer
-  attr_accessor :name, :dealer_cards, :count, :money
+  attr_accessor :name, :hand, :count, :money
 
   def initialize
     @name = "Dealer"
-    @dealer_cards = []
+    @hand = Hand.new
     @count = 0
     @money = 100
   end
