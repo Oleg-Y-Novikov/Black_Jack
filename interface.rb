@@ -8,7 +8,8 @@ class Interface
   attr_reader :game
 
   def initialize
-    @start_image = File.readlines("./image/info.txt")
+    @current_path = File.dirname(__FILE__)
+    @start_image = File.readlines("#{@current_path}/image/info.txt")
   end
 
   def run
