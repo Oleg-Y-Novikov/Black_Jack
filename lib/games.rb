@@ -43,7 +43,7 @@ class Games
 
   def place_bets
     if @player.money < 10
-      `play {{./audio/1.wav}}`
+      `play {{./../audio/1.wav}}`
       abort "Вы проиграли все деньги...🤬"
     elsif @opponent.money < 10
       abort "Победа! Вы оставили казино без денег! 🤑🥳"

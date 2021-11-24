@@ -9,7 +9,7 @@ class Interface
 
   def initialize
     @current_path = File.dirname(__FILE__)
-    @start_image = File.readlines("#{@current_path}/image/info.txt")
+    @start_image = File.readlines("#{@current_path}/../image/info.txt")
   end
 
   def run
